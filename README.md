@@ -1,7 +1,7 @@
 # dimdens-hotel-theme
 My personal theme for BetterDiscord.
 
-[Screenshot](https://lune.dimden.dev/2c1741aa58.png)
+![Screenshot](https://lune.dimden.dev/2c1741aa58.png)
 
 # Installation
 - Get [OLED Theme](https://github.com/dimdenGD/discord-oled-theme)
