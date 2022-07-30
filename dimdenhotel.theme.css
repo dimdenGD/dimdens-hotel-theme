@@ -1,0 +1,101 @@
+/**
+ * @name         dimden's hotel theme
+ * @description  idk
+ * @author       dimden#9900
+ * @version      1.1
+ * @invite       5jm5P3SJF3
+ * @authorId     258557706892214282
+ * @website      https://dimden.dev
+ * @donate       https://www.patreon.com/dimdendev
+ */
+
+body,
+.text-sm-normal-3Zj3Iv.subtext-21DUaG,
+.text-sm-normal-3Zj3Iv.title-338goq,
+.text-xs-normal-3SiVjE.subtext-2HDqJ7,
+.nameTag-H6kSJ0,
+.text-md-normal-304U3g,
+.text-xs-normal-3SiVjE.autocompleteRowContentSecondary-Oobh2b,
+.contents-3ca1mk,
+.customStatus-kFfkj5,
+.textarea-_59yqs,
+.connectedAccountNameText-2m46Qn {
+    font-family: "Terminus (TTF) for Windows", "MS UI Gothic" !important;
+}
+.username-h_Y3Us {
+    font-weight: bold;
+}
+.name-3BUDLf.container-q97qHp,
+.threadName-2k9mLl,
+.header-2Kx1US,
+.header-1w9Q93 > h3,
+.headerText-1qIDDT,
+.contentTitle-3CylD3,
+.userInfoSectionHeader-2mYYun,
+.headerText-3g1XK9,
+.eyebrow-Ejf06y {
+    color: #2c9080;
+    font-family: "Pixel NES";
+    text-shadow: 0 0 3px #2c9080;
+}
+.wrapper-1S43wv.muted-19J0ih, .wrapper-1S43wv.muted-19J0ih .name-3BUDLf {
+    text-shadow: none;
+}
+.membersGroup-2eiWxl.container-q97qHp {
+    font-family: "Pixel NES";
+}
+.text-xs-normal-3SiVjE.sectionHeader-QsOv68,
+.title-17SveM.base-ZDDK0g,
+.name-3Uvkvr,
+.title-3hptVQ,
+.nickname-t08Mck,
+.searchBarComponent-3N7dCG,
+.name-2m3Cms,
+.tabBarItem-30Te4-,
+.activityName-3YXl6e,
+.listName-PwbeHL {
+    font-family: "Terminus (TTF) for Windows", "MS UI Gothic";
+    font-weight: bold;
+}
+.messageContent-2t3eCI,
+.channelName-3KPsGw,
+.username-u-ebrn,
+.userInfoText-2MFCmH {
+    letter-spacing: -0.7px;
+}
+.avatar-3QF_VA, .avatar-2Vndt_, .mask-1FEkla > foreignObject, .avatar-2e8lTP,
+.svg-2zuE5p > foreignObject {
+    mask: none !important;
+    border-radius: 15% !important;
+}
+
+.messageContent-2t3eCI {
+    text-shadow: 0 0 20px #ffffff4a;
+}
+.markup-eYLPri a {
+    text-shadow: 0 0 20px #00adf167;
+}
+.username-h_Y3Us {
+    text-shadow: 0 0 20px currentcolor;
+}
+.markup-eYLPri code {
+    text-shadow: none;
+}
+.timestamp-p1Df1m {
+    font-size: 14px !important;
+    vertical-align: bottom;
+    overflow-y: hidden;
+    font-family: "MS Gothic";
+}
+.hotel-msg-userid {
+    font-size: 14px !important;
+    vertical-align: middle;
+    font-family: "MS Gothic";
+    text-shadow: 0 0 20px currentcolor;
+}
+.hotel-msg-userid-voh {
+    opacity: 0;
+}
+.message-2CShn3:hover .hotel-msg-userid-voh {
+    opacity: 1;
+}
