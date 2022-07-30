@@ -7,3 +7,4 @@ My personal theme for BetterDiscord.
 - Get [OLED Theme](https://github.com/dimdenGD/discord-oled-theme)
 - Download & install all fonts in `fonts` folder
 - Download & install plugin & theme
+- Turn on Compact Mode in Appearance settings
