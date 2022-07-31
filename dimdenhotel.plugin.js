@@ -101,7 +101,7 @@ class dimdensHotelPlugin {
         if(time.parentElement.className.includes('timestampVisibleOnHover')) {
             idSpan.classList.add('hotel-msg-userid-voh');
         }
-        idSpan.style.color = `#${message.dataset.authorId.slice(-6)}`;
+        idSpan.style.color = `#${message.dataset.authorId.slice(7, 10)}`;
         idSpan.innerText = (+message.dataset.authorId.slice(-8)).toString(16).toUpperCase().slice(-4);
         idSpan.title = message.dataset.authorId;
         time.parentElement.after(idSpan);
@@ -109,7 +109,7 @@ class dimdensHotelPlugin {
         if(this.isDM) {
             let username = msg.getElementsByClassName('username-h_Y3Us')[0];
             if(!username.style.color) {
-                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(-6)}`, 80);
+                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
             }
         }
     }
