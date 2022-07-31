@@ -25,6 +25,7 @@ class dimdensHotelPlugin {
         this.patchInterval = setInterval(() => {
             let container = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
             let firstMessage = Array.from(container.children).reverse().find(m => m.id.includes('chat-messages'));
+            this.isDM = container.ariaLabel === "Messages in ";
             if(firstMessage) {
                 if(!firstMessage.getElementsByClassName('hotel-msg-userid')[0]) {
                     this.patchAllMessages();
