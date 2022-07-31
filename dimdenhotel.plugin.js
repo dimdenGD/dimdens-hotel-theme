@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 0.0.2
+ * @version 0.0.3
  * @website https://dimden.dev
  */
 
@@ -9,12 +9,15 @@ class dimdensHotelPlugin {
         this.messageObserver = undefined;
         this.containerObserver = undefined;
         this.patchInterval = undefined;
+        this.isDM = false;
     }
     async start() {
         let container = document.getElementsByClassName('content-1jQy2l')[0];
         if(!container) return setTimeout(() => this.start(), 1000);
         this.containerObserver = new MutationObserver(() => {
             if(this.messageObserver) this.messageObserver.disconnect();
+            let scroller = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
+            this.isDM = scroller.ariaLabel === "Messages in ";
             this.setMessageObserver();
             this.patchAllMessages();
         });
@@ -56,6 +59,30 @@ class dimdensHotelPlugin {
         });
         this.messageObserver.observe(messages, { childList: true });
     }
+    hex2rgb(hex) {
+        return [
+            parseInt(hex.slice(1, 3), 16),
+            parseInt(hex.slice(3, 5), 16),
+            parseInt(hex.slice(5, 7), 16)
+        ];
+    }
+    colorShade(col, amt) {
+        col = col.replace(/^#/, '')
+        if (col.length === 3) col = col[0] + col[0] + col[1] + col[1] + col[2] + col[2]
+      
+        let [r, g, b] = col.match(/.{2}/g);
+        ([r, g, b] = [parseInt(r, 16) + amt, parseInt(g, 16) + amt, parseInt(b, 16) + amt])
+      
+        r = Math.max(Math.min(255, r), 0).toString(16)
+        g = Math.max(Math.min(255, g), 0).toString(16)
+        b = Math.max(Math.min(255, b), 0).toString(16)
+      
+        const rr = (r.length < 2 ? '0' : '') + r
+        const gg = (g.length < 2 ? '0' : '') + g
+        const bb = (b.length < 2 ? '0' : '') + b
+      
+        return `#${rr}${gg}${bb}`
+    }
     async patchMessage(msg) {
         if(msg.getElementsByClassName('hotel-msg-userid')[0]) return;
         if(!msg) return;
@@ -77,9 +104,11 @@ class dimdensHotelPlugin {
         idSpan.title = message.dataset.authorId;
         time.parentElement.after(idSpan);
 
-        let username = msg.getElementsByClassName('username-h_Y3Us')[0];
-        if(!username.style.color) {
-            username.style.color = `#${message.dataset.authorId.slice(-6)}`;
+        if(this.isDM) {
+            let username = msg.getElementsByClassName('username-h_Y3Us')[0];
+            if(!username.style.color) {
+                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(-6)}`, 80);
+            }
         }
     }
 }
