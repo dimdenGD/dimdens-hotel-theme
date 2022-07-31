@@ -10,14 +10,18 @@ class dimdensHotelPlugin {
         this.containerObserver = undefined;
         this.patchInterval = undefined;
         this.isDM = false;
+        this.currentChannel = undefined;
     }
     async start() {
         let container = document.getElementsByClassName('content-1jQy2l')[0];
         if(!container) return setTimeout(() => this.start(), 1000);
+        
+        this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
         this.containerObserver = new MutationObserver(() => {
             if(this.messageObserver) this.messageObserver.disconnect();
             let scroller = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
             this.isDM = scroller.ariaLabel === "Messages in ";
+            this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
             this.setMessageObserver();
             this.patchAllMessages();
         });
@@ -26,6 +30,7 @@ class dimdensHotelPlugin {
             let container = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
             let firstMessage = Array.from(container.children).reverse().find(m => m.id.includes('chat-messages'));
             this.isDM = container.ariaLabel === "Messages in ";
+            this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
             if(firstMessage) {
                 if(!firstMessage.getElementsByClassName('hotel-msg-userid')[0]) {
                     this.patchAllMessages();
@@ -68,6 +73,9 @@ class dimdensHotelPlugin {
             parseInt(hex.slice(5, 7), 16)
         ];
     }
+    getMessageData(msg_id) {
+        return BdApi.findModuleByProps("getMessages").getMessage(this.currentChannel, msg_id);
+    }
     colorShade(col, amt) {
         col = col.replace(/^#/, '')
         if (col.length === 3) col = col[0] + col[0] + col[1] + col[1] + col[2] + col[2]
@@ -94,7 +102,9 @@ class dimdensHotelPlugin {
 
         if(time) {
             let date = new Date(time.getAttribute('datetime'));
-            time.innerText = `${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
+            let currentDate = new Date();
+            if(currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay()) time.parentElement.classList.add('hotel-not-today');
+            time.innerText = `${(currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay()) ? `${(date.getFullYear()+"").slice(2)}${this.pad(date.getMonth()+1)} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
         }
         let idSpan = document.createElement('span');
         idSpan.className = 'hotel-msg-userid';
