@@ -29,6 +29,7 @@ class dimdensHotelPlugin {
             if(firstMessage) {
                 if(!firstMessage.getElementsByClassName('hotel-msg-userid')[0]) {
                     this.patchAllMessages();
+                    this.setMessageObserver();
                 }
             }
         }, 1000);
