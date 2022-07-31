@@ -2,7 +2,7 @@
  * @name         dimden's hotel theme
  * @description  idk
  * @author       dimden#9900
- * @version      1.1
+ * @version      1.2
  * @invite       5jm5P3SJF3
  * @authorId     258557706892214282
  * @website      https://dimden.dev
@@ -92,6 +92,8 @@ body,
     vertical-align: middle;
     font-family: "MS Gothic";
     text-shadow: 0 0 20px currentcolor;
+    cursor: default;
+    user-select: none;
 }
 .hotel-msg-userid-voh {
     opacity: 0;
@@ -101,4 +103,17 @@ body,
 }
 .header-2jRmjb {
     margin-left: -25px;
+}
+.hotel-not-today {
+    width: 80px !important;
+}
+.hotel-msg-avatar {
+    display: inline;
+    border-radius: 3px;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 4px;
+}
+.message-2CShn3:hover .hotel-msg-avatar {
+    opacity: 0;
 }
