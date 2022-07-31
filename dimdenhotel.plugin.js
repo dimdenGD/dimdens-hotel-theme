@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 0.0.3
+ * @version 0.0.4
  * @website https://dimden.dev
  */
 
@@ -103,8 +103,9 @@ class dimdensHotelPlugin {
         if(time) {
             let date = new Date(time.getAttribute('datetime'));
             let currentDate = new Date();
-            if(currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay()) time.parentElement.classList.add('hotel-not-today');
-            time.innerText = `${(currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay()) ? `${(date.getFullYear()+"").slice(2)}${this.pad(date.getMonth()+1)} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
+            let notToday = currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay();
+            if(notToday) time.parentElement.classList.add('hotel-not-today');
+            time.innerText = `${notToday ? `${(date.getFullYear()+"").slice(2)}${this.pad(date.getMonth()+1)} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
         }
         let idSpan = document.createElement('span');
         idSpan.className = 'hotel-msg-userid';
@@ -120,6 +121,29 @@ class dimdensHotelPlugin {
             let username = msg.getElementsByClassName('username-h_Y3Us')[0];
             if(!username.style.color) {
                 username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
+            }
+        }
+
+        const messages = Array.from(msg.parentElement.children);
+        const index = messages.indexOf(msg);
+        let previousMessage = messages[index - 1];
+        if(
+            previousMessage &&
+            previousMessage.id.includes("chat-messages-") &&
+            !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
+            message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
+        ) {
+            let previousId = previousMessage.id.split("-")[2];
+            let previousData = this.getMessageData(previousId);
+            if(previousData) {
+                if(previousData.author.id === message.dataset.authorId) {
+                    let avatar = document.createElement('img');
+                    avatar.className = 'hotel-msg-avatar';
+                    avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${previousData.author.avatar}.png`;
+                    avatar.width = 16;
+                    avatar.height = 16;
+                    time.parentElement.after(avatar);
+                }
             }
         }
     }
