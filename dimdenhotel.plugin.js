@@ -118,7 +118,7 @@ class dimdensHotelPlugin {
         time.parentElement.after(idSpan);
 
         if(this.isDM) {
-            let username = msg.getElementsByClassName('username-h_Y3Us')[0];
+            let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
             if(!username.style.color) {
                 username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
             }
