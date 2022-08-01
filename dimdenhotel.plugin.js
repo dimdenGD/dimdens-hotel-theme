@@ -117,10 +117,14 @@ class dimdensHotelPlugin {
         idSpan.title = message.dataset.authorId;
         time.parentElement.after(idSpan);
 
+        let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
         if(this.isDM) {
-            let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
             if(!username.style.color) {
                 username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
+            }
+        } else {
+            if(!username.style.color) {
+                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
             }
         }
 
