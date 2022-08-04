@@ -105,7 +105,7 @@ class dimdensHotelPlugin {
             let currentDate = new Date();
             let notToday = currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay();
             if(notToday) time.parentElement.classList.add('hotel-not-today');
-            time.innerText = `${notToday ? `${(date.getFullYear()+"").slice(2)}${this.pad(date.getMonth()+1)} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
+            time.innerText = `${notToday ? `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
         }
         let idSpan = document.createElement('span');
         idSpan.className = 'hotel-msg-userid';
