@@ -1,7 +1,8 @@
 # dimdens-hotel-theme
-My personal theme for BetterDiscord.
-First 4 numbers is HHMM (time), after that there's last 4 symbols of ID hex. There's also a color generated from user ID.
-People will be also colored in DMs (or if they don't have a role on server) with their ID generated color. 
+My personal theme for BetterDiscord.  
+First 4 numbers is HHMM (time), after that there's last 4 symbols of ID hex. There's also a color generated from user ID.  
+People will be also colored in DMs (or if they don't have a role on server) with their ID generated color.  
+My Discord server: https://discord.gg/5jm5P3SJF3  
 
 ![Screenshot](https://lune.dimden.dev/a0e0882a32.png)
 
