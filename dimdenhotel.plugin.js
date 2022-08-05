@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 0.0.4
+ * @version 0.0.5
  * @website https://dimden.dev
  */
 
@@ -60,7 +60,9 @@ class dimdensHotelPlugin {
         this.messageObserver = new MutationObserver(mutationList => {
             for (const mutation of mutationList) {
                 if (mutation.type === 'childList') {
-                    this.patchMessage(mutation.addedNodes[0]);
+                    for (const msg of mutation.addedNodes) {
+                        this.patchMessage(msg);
+                    }
                 }
             }
         });
@@ -118,13 +120,15 @@ class dimdensHotelPlugin {
         time.parentElement.after(idSpan);
 
         let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
-        if(this.isDM) {
-            if(!username.style.color) {
-                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
-            }
-        } else {
-            if(!username.style.color) {
-                username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
+        if(username) {
+            if(this.isDM) {
+                if(!username.style.color) {
+                    username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
+                }
+            } else {
+                if(!username.style.color) {
+                    username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
+                }
             }
         }
 
