@@ -149,8 +149,14 @@ class dimdensHotelPlugin {
             let date = new Date(time.getAttribute('datetime'));
             let currentDate = new Date();
             let notToday = currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay();
-            if(notToday) time.parentElement.classList.add('hotel-not-today');
-            time.innerText = `${notToday ? `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} ` : ''}${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
+            if(notToday) {
+                let dateElement = document.createElement('span');
+                dateElement.className = 'hotel-msg-date';
+                dateElement.innerText = `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} `;
+                time.parentElement.classList.add('hotel-not-today');
+                time.before(dateElement);
+            }
+            time.innerText = `${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
             let dayminute = date.getHours()*60+date.getMinutes();
             if(dayminute < 1440/2) time.style.color = this.getGradientColor("#0000ff", "#ffff00", dayminute/(1440/2));
             else time.style.color = this.getGradientColor("#0000ff", "#ffff00", (1440-dayminute)/(1440/2));
