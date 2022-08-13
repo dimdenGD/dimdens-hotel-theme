@@ -139,72 +139,76 @@ class dimdensHotelPlugin {
         return `#${rr}${gg}${bb}`
     }
     async patchMessage(msg) {
-        if(msg.getElementsByClassName('hotel-msg-userid')[0]) return;
-        if(!msg) return;
-        let time = msg.getElementsByTagName('time')[0];
-        if(!time) return;
-        let message = msg.getElementsByClassName('message-2CShn3')[0];
+        try {
+            if(msg.getElementsByClassName('hotel-msg-userid')[0]) return;
+            if(!msg) return;
+            let time = msg.getElementsByTagName('time')[0];
+            if(!time) return;
+            let message = msg.getElementsByClassName('message-2CShn3')[0];
 
-        if(time) {
-            let date = new Date(time.getAttribute('datetime'));
-            let currentDate = new Date();
-            let notToday = currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay();
-            if(notToday) {
-                let dateElement = document.createElement('span');
-                dateElement.className = 'hotel-msg-date';
-                dateElement.innerText = `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} `;
-                time.parentElement.classList.add('hotel-not-today');
-                time.before(dateElement);
-            }
-            time.innerText = `${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
-            let dayminute = date.getHours()*60+date.getMinutes();
-            if(dayminute < 1440/2) time.style.color = this.getGradientColor("#0000ff", "#ffff00", dayminute/(1440/2));
-            else time.style.color = this.getGradientColor("#0000ff", "#ffff00", (1440-dayminute)/(1440/2));
-        }
-        let idSpan = document.createElement('span');
-        idSpan.className = 'hotel-msg-userid';
-        if(time.parentElement.className.includes('timestampVisibleOnHover')) {
-            idSpan.classList.add('hotel-msg-userid-voh');
-        }
-        idSpan.style.color = `#${message.dataset.authorId.slice(7, 10)}`;
-        idSpan.innerText = (+message.dataset.authorId.slice(-8)).toString(16).toUpperCase().slice(-4);
-        idSpan.title = message.dataset.authorId;
-        time.parentElement.after(idSpan);
-
-        let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
-        if(username) {
-            if(this.isDM) {
-                if(!username.style.color) {
-                    username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
+            if(time) {
+                let date = new Date(time.getAttribute('datetime'));
+                let currentDate = new Date();
+                let notToday = currentDate.getTime() - date.getTime() > 8.64e+7 || currentDate.getDay() !== date.getDay();
+                if(notToday) {
+                    let dateElement = document.createElement('span');
+                    dateElement.className = 'hotel-msg-date';
+                    dateElement.innerText = `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} `;
+                    time.parentElement.classList.add('hotel-not-today');
+                    time.before(dateElement);
                 }
-            } else {
-                if(!username.style.color) {
-                    username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
-                }
+                time.innerText = `${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
+                let dayminute = date.getHours()*60+date.getMinutes();
+                if(dayminute < 1440/2) time.style.color = this.getGradientColor("#0000ff", "#ffff00", dayminute/(1440/2));
+                else time.style.color = this.getGradientColor("#0000ff", "#ffff00", (1440-dayminute)/(1440/2));
             }
-        }
+            let idSpan = document.createElement('span');
+            idSpan.className = 'hotel-msg-userid';
+            if(time.parentElement.className.includes('timestampVisibleOnHover')) {
+                idSpan.classList.add('hotel-msg-userid-voh');
+            }
+            idSpan.style.color = `#${message.dataset.authorId.slice(7, 10)}`;
+            idSpan.innerText = (+message.dataset.authorId.slice(-8)).toString(16).toUpperCase().slice(-4);
+            idSpan.title = message.dataset.authorId;
+            time.parentElement.after(idSpan);
 
-        const messages = Array.from(msg.parentElement.children);
-        const index = messages.indexOf(msg);
-        let previousMessage = messages[index - 1];
-        if(
-            previousMessage &&
-            previousMessage.id.includes("chat-messages-") &&
-            !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
-            message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
-        ) {
-            let previousId = previousMessage.id.split("-")[2];
-            let previousData = this.getMessageData(previousId);
-            if(previousData) {
-                if(previousData.author.id === message.dataset.authorId) {
-                    let avatar = document.createElement('img');
-                    avatar.className = 'hotel-msg-avatar';
-                    avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${previousData.author.avatar}.png`;
-                    avatar.width = 16;
-                    avatar.height = 16;
-                    time.parentElement.after(avatar);
+            let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
+            if(username) {
+                if(this.isDM) {
+                    if(!username.style.color) {
+                        username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 80);
+                    }
+                } else {
+                    if(!username.style.color) {
+                        username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
+                    }
                 }
             }
+
+            const messages = Array.from(msg.parentElement.children);
+            const index = messages.indexOf(msg);
+            let previousMessage = messages[index - 1];
+            if(
+                previousMessage &&
+                previousMessage.id.includes("chat-messages-") &&
+                !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
+                message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
+            ) {
+                let previousId = previousMessage.id.split("-")[2];
+                let previousData = this.getMessageData(previousId);
+                if(previousData) {
+                    if(previousData.author.id === message.dataset.authorId) {
+                        let avatar = document.createElement('img');
+                        avatar.className = 'hotel-msg-avatar';
+                        avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${previousData.author.avatar}.png`;
+                        avatar.width = 16;
+                        avatar.height = 16;
+                        time.parentElement.after(avatar);
+                    }
+                }
+            }
+        } catch(e) {
+            console.error(e, msg);
         }
     }
 }
