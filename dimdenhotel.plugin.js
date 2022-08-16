@@ -146,6 +146,7 @@ class dimdensHotelPlugin {
             if(!time) return;
             let message = msg.getElementsByClassName('message-2CShn3')[0];
             let _notToday = false;
+            let isSystemMessage = !!msg.getElementsByClassName('isSystemMessage-QNv9ZH')[0];
 
             if(time) {
                 let date = new Date(time.getAttribute('datetime'));
@@ -214,7 +215,8 @@ class dimdensHotelPlugin {
             }
             // avatar for message with media if it's first message in a row
             if(
-                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
+                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
+                !isSystemMessage
             ) {
                 let currentData = this.getMessageData(msg.id.split("-")[2]);
                 if(currentData) {
