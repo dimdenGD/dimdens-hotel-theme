@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.0
+ * @version 1.4.1
  * @website https://dimden.dev
  */
 
@@ -145,6 +145,7 @@ class dimdensHotelPlugin {
             let time = msg.getElementsByTagName('time')[0];
             if(!time) return;
             let message = msg.getElementsByClassName('message-2CShn3')[0];
+            let _notToday = false;
 
             if(time) {
                 let date = new Date(time.getAttribute('datetime'));
@@ -155,6 +156,7 @@ class dimdensHotelPlugin {
                     dateElement.className = 'hotel-msg-date';
                     dateElement.innerText = `${this.pad(date.getMonth()+1)}${this.pad(date.getDate())} `;
                     time.parentElement.classList.add('hotel-not-today');
+                    _notToday = true;
                     time.before(dateElement);
                 }
                 time.innerText = `${this.pad(date.getHours())}${this.pad(date.getMinutes())}`;
@@ -197,7 +199,10 @@ class dimdensHotelPlugin {
             ) {
                 let previousData = this.getMessageData(previousMessage.id.split("-")[2]);
                 if(previousData) {
-                    if(previousData.author.id === message.dataset.authorId && !previousMessage.querySelector('.imageWrapper-oMkQl4 img')) {
+                    if(
+                        previousData.author.id === message.dataset.authorId &&
+                        (previousMessage.offsetHeight <= 32 || previousMessage.querySelector('.repliedMessage-3Z6XBG'))
+                    ) {
                         let avatar = document.createElement('img');
                         avatar.className = 'hotel-msg-avatar';
                         avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${previousData.author.avatar}.png?size=16`;
@@ -212,14 +217,13 @@ class dimdensHotelPlugin {
                 previousMessage &&
                 previousMessage.id.includes("chat-messages-") &&
                 !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
-                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
+                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
+                !_notToday
             ) {
                 let previousData = this.getMessageData(previousMessage.id.split("-")[2]);
                 let currentData = this.getMessageData(msg.id.split("-")[2]);
                 if(previousData && currentData) {
-                    let img = message.querySelector('.imageWrapper-oMkQl4 img');
-                    let sticker = message.querySelector('.stickerAsset-4c7Oqy');
-                    if((img && img.height > 24) || sticker) {
+                    if(msg.offsetHeight > 32 && !msg.querySelector('.repliedMessage-3Z6XBG')) {
                         let avatar = document.createElement('img');
                         avatar.className = 'hotel-msg-avatar hotel-msg-avatar-media';
                         avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${currentData.author.avatar}.png?size=16`;
