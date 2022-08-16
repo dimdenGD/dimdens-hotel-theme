@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.1
+ * @version 1.4.2
  * @website https://dimden.dev
  */
 
@@ -214,23 +214,21 @@ class dimdensHotelPlugin {
             }
             // avatar for message with media if it's first message in a row
             if(
-                previousMessage &&
-                previousMessage.id.includes("chat-messages-") &&
-                !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
-                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
-                !_notToday
+                !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
             ) {
-                let previousData = this.getMessageData(previousMessage.id.split("-")[2]);
                 let currentData = this.getMessageData(msg.id.split("-")[2]);
-                if(previousData && currentData) {
-                    if(msg.offsetHeight > 32 && !msg.querySelector('.repliedMessage-3Z6XBG')) {
-                        let avatar = document.createElement('img');
-                        avatar.className = 'hotel-msg-avatar hotel-msg-avatar-media';
-                        avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${currentData.author.avatar}.png?size=16`;
-                        avatar.width = 16;
-                        avatar.height = 16;
-                        time.parentElement.after(avatar);
-                    }
+                if(currentData) {
+                    setTimeout(() => {
+                        if(msg.offsetHeight > 64 || (msg.offsetHeight > 32 && !msg.querySelector('.repliedMessage-3Z6XBG'))) {
+                            let avatar = document.createElement('img');
+                            avatar.className = 'hotel-msg-avatar hotel-msg-avatar-media';
+                            if(_notToday) avatar.classList.add('hotel-msg-avatar-not-today');
+                            avatar.src = `https://cdn.discordapp.com/avatars/${message.dataset.authorId}/${currentData.author.avatar}.png?size=16`;
+                            avatar.width = 16;
+                            avatar.height = 16;
+                            time.parentElement.after(avatar);
+                        }
+                    }, 250);
                 }
             }
         } catch(e) {
