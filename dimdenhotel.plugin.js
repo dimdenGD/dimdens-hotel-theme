@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.2
+ * @version 1.4.3
  * @website https://dimden.dev
  */
 
@@ -184,6 +184,13 @@ class dimdensHotelPlugin {
                 } else {
                     if(!username.style.color) {
                         username.style.color = this.colorShade(`#${message.dataset.authorId.slice(7, 10)}`, 150);
+                    } else {
+                        if(username.style.color.includes('rgb(')) {
+                            let rgb = username.style.color.match(/\d+/g).map(x => parseInt(x));
+                            if(rgb[0] < 13 && rgb[1] < 13 && rgb[2] < 13) {
+                                username.style.color = 'rgb(13, 13, 13)';
+                            }
+                        }
                     }
                 }
             }
