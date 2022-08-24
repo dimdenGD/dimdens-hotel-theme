@@ -160,5 +160,5 @@ body,
     margin-left: -20px;
 }
 .userInfoBody-1zgAd0 .text-sm-normal-3Zj3Iv {
-    font-size: 12px;
+    -webkit-line-clamp: 12 !important;
 }
