@@ -2,7 +2,7 @@
  * @name         dimden's hotel theme
  * @description  idk
  * @author       dimden#9900
- * @version      1.4.2
+ * @version      1.4.3
  * @invite       5jm5P3SJF3
  * @authorId     258557706892214282
  * @website      https://dimden.dev
@@ -19,7 +19,8 @@ body,
 .contents-3ca1mk,
 .customStatus-kFfkj5,
 .textarea-_59yqs,
-.connectedAccountNameText-2m46Qn {
+.connectedAccountNameText-2m46Qn,
+.text-sm-normal-3Zj3Iv {
     font-family: "Terminus (TTF) for Windows", "MS UI Gothic" !important;
 }
 .username-h_Y3Us {
@@ -137,11 +138,10 @@ body,
     margin-top: 2px;
 }
 
-.systemMessage-1H1Z20 .timestamp-p1Df1m {
-    text-shadow: none;
-}
 .repliedMessage-3Z6XBG .username-h_Y3Us,
-.repliedMessage-3Z6XBG .repliedTextContent-2hOYMB {
+.repliedMessage-3Z6XBG .repliedTextContent-2hOYMB,
+.edited-1v5nT8,
+.systemMessage-1H1Z20 .timestamp-p1Df1m {
     text-shadow: none;
 }
 .hotel-msg-date {
@@ -158,4 +158,7 @@ body,
 }
 .hotel-msg-avatar-not-today {
     margin-left: -20px;
+}
+.userInfoBody-1zgAd0 .text-sm-normal-3Zj3Iv {
+    font-size: 12px;
 }
