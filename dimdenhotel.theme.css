@@ -162,3 +162,7 @@ body,
 .userInfoBody-1zgAd0 .text-sm-normal-3Zj3Iv {
     -webkit-line-clamp: 12 !important;
 }
+.separator-AebOhG {
+    z-index: -5;
+    user-select: none;
+}
