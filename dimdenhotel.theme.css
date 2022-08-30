@@ -2,7 +2,7 @@
  * @name         dimden's hotel theme
  * @description  idk
  * @author       dimden#9900
- * @version      1.4.3
+ * @version      1.4.4
  * @invite       5jm5P3SJF3
  * @authorId     258557706892214282
  * @website      https://dimden.dev
@@ -101,6 +101,7 @@ body,
     text-shadow: 0 0 20px currentcolor;
     cursor: default;
     user-select: none;
+    margin-right: 5px;
 }
 .hotel-msg-userid-voh {
     opacity: 0;
