@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.4
+ * @version 1.4.5
  * @website https://dimden.dev
  */
 
@@ -11,17 +11,19 @@ class dimdensHotelPlugin {
         this.patchInterval = undefined;
         this.isDM = false;
         this.currentChannel = undefined;
+        this.getMessages = BdApi.findModuleByProps("getMessages");
+        this.getChannelId = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId;
     }
     async start() {
         let container = document.getElementsByClassName('content-1jQy2l')[0];
         if(!container) return setTimeout(() => this.start(), 1000);
         
-        this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
+        this.currentChannel = this.getChannelId();
         this.containerObserver = new MutationObserver(() => {
             if(this.messageObserver) this.messageObserver.disconnect();
             let scroller = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
             this.isDM = scroller.ariaLabel === "Messages in ";
-            this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
+            this.currentChannel = this.getChannelId();
             this.setMessageObserver();
             this.patchAllMessages();
         });
@@ -30,7 +32,7 @@ class dimdensHotelPlugin {
             let container = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
             let firstMessage = Array.from(container.children).reverse().find(m => m.id.includes('chat-messages'));
             this.isDM = container.ariaLabel === "Messages in ";
-            this.currentChannel = BdApi.findModuleByProps("getLastSelectedChannelId", "getChannelId").getChannelId();
+            this.currentChannel = this.getChannelId();
             if(firstMessage) {
                 if(!firstMessage.getElementsByClassName('hotel-msg-userid')[0]) {
                     this.patchAllMessages();
@@ -119,7 +121,7 @@ class dimdensHotelPlugin {
         ];
     }
     getMessageData(msg_id) {
-        return BdApi.findModuleByProps("getMessages").getMessage(this.currentChannel, msg_id);
+        return this.getMessages.getMessage(this.currentChannel, msg_id);
     }
     colorShade(col, amt) {
         col = col.replace(/^#/, '')
@@ -228,7 +230,13 @@ class dimdensHotelPlugin {
         ) {
             if(currentData) {
                 setTimeout(() => {
-                    if(msg.offsetHeight > 64 || (msg.offsetHeight > 32 && !msg.querySelector('.repliedMessage-3Z6XBG'))) {
+                    if(
+                        msg.offsetHeight > 64 ||
+                        (
+                            msg.offsetHeight > 32 &&
+                            !msg.querySelector('.repliedMessage-3Z6XBG')
+                        )
+                    ) {
                         let avatar = document.createElement('img');
                         avatar.className = 'hotel-msg-avatar hotel-msg-avatar-media';
                         if(_notToday) avatar.classList.add('hotel-msg-avatar-not-today');
