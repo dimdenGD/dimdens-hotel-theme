@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.5
+ * @version 1.4.6
  * @website https://dimden.dev
  */
 
@@ -148,7 +148,7 @@ class dimdensHotelPlugin {
         let message = msg.getElementsByClassName('message-2CShn3')[0];
         let _notToday = false;
         let isSystemMessage = !!msg.getElementsByClassName('isSystemMessage-QNv9ZH')[0];
-        let currentData = this.getMessageData(msg.id.split("-")[2]);
+        let currentData = this.getMessageData(msg.id.split("-")[3]);
         message.dataset.authorId = currentData.author.id;
 
         if(time) {
