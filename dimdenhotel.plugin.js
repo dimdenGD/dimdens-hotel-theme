@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.6
+ * @version 1.4.7
  * @website https://dimden.dev
  */
 
@@ -38,6 +38,10 @@ class dimdensHotelPlugin {
                     this.patchAllMessages();
                     this.setMessageObserver();
                 }
+            }
+            let mask = document.getElementById("svg-mask-avatar-status-round-32");
+            if(mask) {
+                mask.remove();
             }
         }, 1000);
     }
