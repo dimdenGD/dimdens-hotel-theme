@@ -1,6 +1,6 @@
 /**
  * @name dimdensHotelPlugin
- * @version 1.4.7
+ * @version 1.4.8
  * @website https://dimden.dev
  */
 
@@ -212,7 +212,7 @@ class dimdensHotelPlugin {
             !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
             message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
         ) {
-            let previousData = this.getMessageData(previousMessage.id.split("-")[2]);
+            let previousData = this.getMessageData(previousMessage.id.split("-")[3]);
             if(previousData) {
                 if(
                     previousData.author.id === message.dataset.authorId &&
