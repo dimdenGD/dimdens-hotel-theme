@@ -7,8 +7,8 @@ My Discord server: https://discord.gg/5jm5P3SJF3
 ![Screenshot](https://lune.dimden.dev/a0e0882a32.png)
 
 # Installation
-- Get [OLED Theme](https://github.com/dimdenGD/discord-oled-theme)
-- Download & install all fonts in `fonts` folder
-- Install [BDFDB](https://betterdiscord.app/plugin/BDFDB) plugin
-- Download & install plugin & theme
-- Turn on Compact Mode in Appearance settings
+- Get [OLED Theme](https://github.com/dimdenGD/discord-oled-theme)  
+- Download & install all fonts in `fonts` folder  
+- Download & install plugin & theme  
+- Turn on Compact Mode in Appearance settings  
+- Restart Discord (yes this is important)  
