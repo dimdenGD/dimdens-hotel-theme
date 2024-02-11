@@ -67,13 +67,14 @@ let that = {
     },
 
     start() {
-        let container = document.getElementsByClassName('content-1jQy2l')[0];
+        console.log('starting dimdens hotel plugin');
+        let container = document.getElementsByClassName('content__1a4fe')[0];
         if(!container) return setTimeout(() => that.start(), 1000);
         
         that.currentChannel = that.getChannelId();
         that.containerObserver = new MutationObserver(() => {
             if(that.messageObserver) that.messageObserver.disconnect();
-            let scroller = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
+            let scroller = document.getElementsByClassName('scrollerInner__059a5')[0];
             that.isDM = scroller.ariaLabel === "Messages in ";
             that.currentChannel = that.getChannelId();
             that.setMessageObserver();
@@ -81,7 +82,7 @@ let that = {
         });
         that.containerObserver.observe(container, { childList: true });
         that.patchInterval = setInterval(() => {
-            let container = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
+            let container = document.getElementsByClassName('scrollerInner__059a5')[0];
             let firstMessage = Array.from(container.children).reverse().find(m => m.id.includes('chat-messages'));
             that.isDM = container.ariaLabel === "Messages in ";
             that.currentChannel = that.getChannelId();
@@ -107,7 +108,7 @@ let that = {
         that.patchInterval = undefined;
     },
     async patchAllMessages() {
-        let messages = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
+        let messages = document.getElementsByClassName('scrollerInner__059a5')[0];
         if(!messages.children[0].getElementsByClassName('hotel-msg-userid')[0]) {
             for (const msg of messages.children) {
                 that.patchMessage(msg);
@@ -115,7 +116,7 @@ let that = {
         }
     },
     async setMessageObserver() {
-        let messages = document.getElementsByClassName('scrollerInner-2PPAp2')[0];
+        let messages = document.getElementsByClassName('scrollerInner__059a5')[0];
         that.messageObserver = new MutationObserver(mutationList => {
             for (const mutation of mutationList) {
                 if (mutation.type === 'childList') {
@@ -127,13 +128,6 @@ let that = {
         });
         that.messageObserver.observe(messages, { childList: true });
     },
-    hex2rgb(hex) {
-        return [
-            parseInt(hex.slice(1, 3), 16),
-            parseInt(hex.slice(3, 5), 16),
-            parseInt(hex.slice(5, 7), 16)
-        ];
-    },
     getMessageData(msg_id) {
         return that.getMessages.getMessage(that.currentChannel, msg_id);
     },
@@ -144,9 +138,15 @@ let that = {
         let [r, g, b] = col.match(/.{2}/g);
         ([r, g, b] = [parseInt(r, 16) + amt, parseInt(g, 16) + amt, parseInt(b, 16) + amt])
       
-        r = Math.max(Math.min(255, r), 0).toString(16)
-        g = Math.max(Math.min(255, g), 0).toString(16)
-        b = Math.max(Math.min(255, b), 0).toString(16)
+        r = Math.max(Math.min(255, r), 0).toString(16);
+        g = Math.max(Math.min(255, g), 0).toString(16);
+        b = Math.max(Math.min(255, b), 0).toString(16);
+
+        if(r < 20 && g < 20 && b < 20) {
+            r += 10;
+            g += 10;
+            b += 10;
+        }
       
         const rr = (r.length < 2 ? '0' : '') + r
         const gg = (g.length < 2 ? '0' : '') + g
@@ -159,9 +159,9 @@ let that = {
         if(!msg) return;
         let time = msg.getElementsByTagName('time')[0];
         if(!time) return;
-        let message = msg.getElementsByClassName('message-2CShn3')[0];
+        let message = msg.getElementsByClassName('message__80c10')[0];
         let _notToday = false;
-        let isSystemMessage = !!msg.getElementsByClassName('isSystemMessage-QNv9ZH')[0];
+        let isSystemMessage = !!msg.getElementsByClassName('isSystemMessage__2ef37')[0];
         let currentData = that.getMessageData(msg.id.split("-")[3]);
         message.dataset.authorId = currentData.author.id;
 
@@ -192,7 +192,7 @@ let that = {
         idSpan.title = message.dataset.authorId;
         time.parentElement.after(idSpan);
 
-        let username = msg.querySelector('.headerText-2z4IhQ > .username-h_Y3Us');
+        let username = msg.querySelector('.username_d30d99');
         if(username) {
             if(that.isDM) {
                 if(!username.style.color) {
@@ -219,14 +219,14 @@ let that = {
         if(
             previousMessage &&
             previousMessage.id.includes("chat-messages-") &&
-            !previousMessage.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
-            message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0]
+            !previousMessage.getElementsByClassName('timestampVisibleOnHover_e8cc6d')[0] &&
+            message.getElementsByClassName('timestampVisibleOnHover_e8cc6d')[0]
         ) {
             let previousData = that.getMessageData(previousMessage.id.split("-")[3]);
             if(previousData) {
                 if(
                     previousData.author.id === message.dataset.authorId &&
-                    (previousMessage.offsetHeight <= 32 || previousMessage.querySelector('.repliedMessage-3Z6XBG'))
+                    (previousMessage.offsetHeight <= 32 || previousMessage.querySelector('.repliedMessage_e2bf4a'))
                 ) {
                     let avatar = document.createElement('img');
                     avatar.className = 'hotel-msg-avatar';
@@ -239,7 +239,7 @@ let that = {
         }
         // avatar for message with media if it's first message in a row
         if(
-            !message.getElementsByClassName('timestampVisibleOnHover-9PEuZS')[0] &&
+            !message.getElementsByClassName('timestampVisibleOnHover_e8cc6d')[0] &&
             !isSystemMessage
         ) {
             if(currentData) {
@@ -249,7 +249,7 @@ let that = {
                         offset > 64 ||
                         (
                             offset > 32 &&
-                            !msg.querySelector('.repliedMessage-3Z6XBG')
+                            !msg.querySelector('.repliedMessage_e2bf4a')
                         )
                     ) {
                         let avatar = document.createElement('img');
