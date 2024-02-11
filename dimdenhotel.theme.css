@@ -2,99 +2,51 @@
  * @name         dimden's hotel theme
  * @description  idk
  * @author       dimden#9900
- * @version      1.4.8
+ * @version      2.0.0
  * @invite       5jm5P3SJF3
  * @authorId     258557706892214282
  * @website      https://dimden.dev
  * @donate       https://www.patreon.com/dimdendev
  */
 
-body,
-.text-sm-normal-3Zj3Iv.subtext-21DUaG,
-.text-sm-normal-3Zj3Iv.title-338goq,
-.text-xs-normal-3SiVjE.subtext-2HDqJ7,
-.nameTag-H6kSJ0,
-.text-md-normal-304U3g,
-.text-xs-normal-3SiVjE.autocompleteRowContentSecondary-Oobh2b,
-.contents-3ca1mk,
-.customStatus-kFfkj5,
-.textarea-_59yqs,
-.connectedAccountNameText-2m46Qn,
-.text-sm-normal-3Zj3Iv {
+body {
     font-family: "Terminus (TTF) for Windows", "MS UI Gothic" !important;
 }
-.username-h_Y3Us {
+
+/* Username */
+.username_d30d99 {
     font-weight: bold;
+    text-shadow: 0 0 20px currentcolor, 0 0 50px currentcolor;
 }
-.name-3BUDLf.container-q97qHp,
-.threadName-2k9mLl,
-.header-2Kx1US,
-.header-1w9Q93 > h3,
-.headerText-1qIDDT,
-.contentTitle-3CylD3,
-.userInfoSectionHeader-2mYYun,
-.headerText-3g1XK9,
-.eyebrow-Ejf06y {
+.repliedMessage_e2bf4a .username_d30d99 {
+    text-shadow: none;
+}
+
+/* Headers */
+.name__590d6,
+.membersGroup__85843,
+.headerText__051c0 {
     color: #2c9080;
     font-family: "Pixel NES";
     text-shadow: 0 0 3px #2c9080;
 }
-.wrapper-1S43wv.muted-19J0ih, .wrapper-1S43wv.muted-19J0ih .name-3BUDLf {
-    text-shadow: none;
+
+/* Avatars */
+svg.svg_ad7356 > foreignObject,
+svg.svg_f5b652 > foreignObject {
+    mask: none;
+    border-radius: 15%;
 }
-.membersGroup-2eiWxl.container-q97qHp {
-    font-family: "Pixel NES";
-}
-.text-xs-normal-3SiVjE.sectionHeader-QsOv68,
-.title-17SveM.base-ZDDK0g,
-.name-3Uvkvr,
-.title-3hptVQ,
-.nickname-t08Mck,
-.searchBarComponent-3N7dCG,
-.name-2m3Cms,
-.tabBarItem-30Te4-,
-.activityName-3YXl6e,
-.listName-PwbeHL {
-    font-family: "Terminus (TTF) for Windows", "MS UI Gothic";
-    font-weight: bold;
-}
-.messageContent-2t3eCI,
-.channelName-3KPsGw,
-.username-u-ebrn,
-.userInfoText-2MFCmH {
-    letter-spacing: -0.7px;
-}
-.avatar-3QF_VA, .avatar-2Vndt_, .mask-1FEkla > foreignObject, .avatar-2e8lTP,
-.svg-2zuE5p > foreignObject, .wrapperSimple-2SFl9K, .wrapper-3Un6-K,
-.mask-1y0tyc.svg-1G_H_8 > foreignObject, .wrapper-3kah-n, .svg-2ifYOU > foreignObject {
-    mask: none !important;
-    border-radius: 15% !important;
+.hotel-msg-avatar {
+    display: inline;
+    border-radius: 3px;
+    position: absolute;
+    margin-left: 6px;
+    margin-top: 4px;
+    user-select: none;
 }
 
-.messageContent-2t3eCI {
-    text-shadow: 0 0 20px #ffffff4a;
-}
-.markup-eYLPri a {
-    text-shadow: 0 0 20px #00adf167;
-}
-.username-h_Y3Us {
-    text-shadow: 0 0 20px currentcolor;
-}
-.searchResult-O9NDji .username-h_Y3Us {
-    text-shadow: none;
-}
-.searchResult-O9NDji .messageContent-2t3eCI {
-    text-shadow: none;
-}
-.markup-eYLPri code {
-    text-shadow: none;
-}
-.timestamp-p1Df1m {
-    font-size: 14px !important;
-    vertical-align: bottom;
-    overflow-y: hidden;
-    font-family: "MS Gothic";
-}
+/* Hexes */
 .hotel-msg-userid {
     font-size: 14px !important;
     vertical-align: middle;
@@ -102,69 +54,52 @@ body,
     text-shadow: 0 0 20px currentcolor;
     cursor: default;
     user-select: none;
-    margin-right: 5px;
+    position: relative;
+    right: 5px;
+    bottom: 1px;
 }
 .hotel-msg-userid-voh {
     opacity: 0;
 }
-.message-2CShn3:hover .hotel-msg-userid-voh {
+.message__80c10:hover .hotel-msg-userid-voh {
     opacity: 1;
 }
-.header-2jRmjb {
-    margin-left: -25px;
+.message__80c10:hover .hotel-msg-avatar {
+    opacity: 0;
 }
-.searchResult-O9NDji .header-2jRmjb {
-    margin-left: 0;
+.timestamp_cdbd93 {
+    font-size: 14px !important;
+    vertical-align: text-top;
+    overflow-y: hidden;
+    font-family: "MS Gothic";
+    position: relative;
+    bottom: 2px;
+    right: 4px;
 }
 .hotel-not-today {
     width: 80px !important;
 }
-.hotel-msg-avatar {
-    display: inline;
-    border-radius: 3px;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: 4px;
-    user-select: none;
-}
-.message-2CShn3:hover .hotel-msg-avatar {
-    opacity: 0;
-}
-.message-2CShn3:hover .hotel-msg-avatar-media {
-    opacity: 1;
-}
 .hotel-msg-avatar-media {
     margin-top: 24px;
-}
-.systemMessage-1H1Z20 .hotel-msg-userid {
-    margin-top: 2px;
-}
-
-.repliedMessage-3Z6XBG .username-h_Y3Us,
-.repliedMessage-3Z6XBG .repliedTextContent-2hOYMB,
-.edited-1v5nT8,
-.systemMessage-1H1Z20 .timestamp-p1Df1m {
-    text-shadow: none;
-}
-.hotel-msg-date {
-    color: #292929;
-}
-.searchResult-O9NDji .hotel-msg-userid {
-    position: absolute;
-    margin-left: -17px;
-    vertical-align: sub;
-    text-shadow: none;
-}
-.searchResult-O9NDji .timestamp-p1Df1m {
-    vertical-align: sub;
 }
 .hotel-msg-avatar-not-today {
     margin-left: -20px;
 }
-.userInfoBody-1zgAd0 .text-sm-normal-3Zj3Iv {
-    -webkit-line-clamp: 12 !important;
+.systemMessage__6e6a4 {
+    margin-left: 88px;
 }
-.separator-AebOhG {
+.hotel-msg-date {
+    color: #292929;
+}
+.separator__3f416 {
     z-index: -5;
     user-select: none;
+}
+.messageContent__21e69 {
+    display: inline-table !important
+}
+
+/* Attachment */
+.mediaAttachmentsContainer_edba75 {
+    margin-left: 20px;
 }
