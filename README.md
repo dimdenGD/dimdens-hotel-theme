@@ -4,7 +4,7 @@ First 4 numbers is HHMM (time), after that there's last 4 symbols of ID hex. The
 People will be also colored in DMs (or if they don't have a role on server) with their ID generated color.  
 My Discord server: https://discord.gg/5jm5P3SJF3  
 
-![Screenshot](https://lune.dimden.dev/a0e0882a32.png)
+![Screenshot](https://lune.dimden.dev/6a65e1b3d5e1.png)  
 
 # Installation
 - Get [OLED Theme](https://github.com/dimdenGD/discord-oled-theme)  
